@@ -10,7 +10,7 @@ GameObject::GameObject()
     this->setVelocity(sf::Vector2f(0,0));
 }
 
-GameObject::GameObject(float x_position, float y_position, float x_velocity, float y_velocity, float x_acceleration, float y_acceleration)
+GameObject::GameObject ( float x_position, float y_position, float x_velocity, float y_velocity, float x_acceleration, float y_acceleration)
 {
     this->setAcceleration(sf::Vector2f(x_acceleration,y_acceleration));
     this->setPosition(sf::Vector2f(x_position,y_position));

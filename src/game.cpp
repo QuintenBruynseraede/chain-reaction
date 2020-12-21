@@ -3,6 +3,7 @@
 #include "utils.hpp"
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include <iostream>
 #include <cstdlib>
@@ -11,7 +12,6 @@ Game::Game ( sf::RenderWindow* win )
 {
     this->window = win;
     this->objects = std::vector<GameObject*>();
-        
     this->fps = 60;
     
     for (int i=0;i<250;i++) {
@@ -28,6 +28,7 @@ void Game::add_object(GameObject* object)
 {
     if (std::count(this->objects.begin(),this->objects.end(),object)) {
         // GameObject already exists
+        return;
     }
     this->objects.push_back(object);
 }
@@ -106,6 +107,9 @@ void Game::render()
 
 void Game::handleLeftClick ( int x, int y )
 {
+    sf::SoundBuffer buffer;
+    buffer.loadFromFile("assets/sounds/tick.wav");
+    
     Sphere* explosion = new Sphere(1,1);
     explosion->explode();
     explosion->setPosition(x,y);

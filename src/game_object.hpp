@@ -2,6 +2,7 @@
 #define GAME_OBJECT_HPP_INCLUDED
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class GameObject {
 public:
@@ -48,6 +49,7 @@ protected:
     
     sf::Vector2f max_position;
     sf::Vector2f min_position;
+    
 private:
     bool isActive=true;
 };

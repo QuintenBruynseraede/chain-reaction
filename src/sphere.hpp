@@ -3,6 +3,8 @@
 
 #include "game_object.hpp"
 
+#include <SFML/Audio.hpp>
+
 class Sphere : public GameObject {
 public:
     Sphere(float radius, float growth);

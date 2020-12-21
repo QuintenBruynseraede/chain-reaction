@@ -12,7 +12,7 @@ Sphere::Sphere(float radius, float growth): GameObject()
     this->growth = growth;
 }
 
-Sphere::Sphere(float radius, float growth, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration) : GameObject(position,velocity,acceleration)
+Sphere::Sphere ( float radius, float growth, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration): GameObject(position,velocity,acceleration)
 {
     this->radius = radius;
     this->growth = growth;
@@ -22,7 +22,7 @@ Sphere::Sphere(float radius, float growth, sf::Vector2f position, sf::Vector2f v
 void Sphere::draw(sf::RenderWindow* window)
 {    
     sf::CircleShape shape(this->radius);
-    shape.setPosition(this->position);
+    shape.setPosition(sf::Vector2f(this->position.x-this->radius,this->position.y-this->radius));
     shape.setFillColor(sf::Color(255,255,255,this->alpha));
     window->draw(shape);
 }
@@ -36,16 +36,16 @@ void Sphere::timestep ( float seconds )
     this->radius = this->radius + seconds * growth;    
 
     // Bounce against edges of window
-    if (this->getX() < this->min_position.x)
+    if (this->getX() < this->min_position.x + this->radius)
         this->setVelocity(-this->getVelocity().x,this->getVelocity().y);
     
-    if (this->getY() < this->min_position.y)
+    if (this->getY() < this->min_position.y + this->radius)
         this->setVelocity(this->getVelocity().x,-this->getVelocity().y);
     
-    if (this->getY() > this->max_position.y-this->radius*2)
+    if (this->getY() > this->max_position.y-this->radius)
         this->setVelocity(this->getVelocity().x,-this->getVelocity().y);
     
-    if (this->getX() > this->max_position.x-this->radius*2)
+    if (this->getX() > this->max_position.x-this->radius)
         this->setVelocity(-this->getVelocity().x,this->getVelocity().y);
     
     if (this->exploding) {
@@ -80,6 +80,9 @@ void Sphere::explode()
         return;
     this->exploding = true;
     this->growth = 200;
+    
+//     Play tick
+
 }
 
 bool Sphere::isExploding()

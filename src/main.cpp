@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-    sf::RenderWindow win(sf::VideoMode(600,600), "Chain reaction");
+    sf::RenderWindow win(sf::VideoMode(800,800), "Chain reaction");
     win.setVerticalSyncEnabled(true);
     win.setFramerateLimit(60);
     
