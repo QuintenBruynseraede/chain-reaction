@@ -7,8 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-    sf::RenderWindow win(sf::VideoMode(600,600), "My Window");
-    win.setTitle("3D Tetris");
+    sf::RenderWindow win(sf::VideoMode(600,600), "Chain reaction");
     win.setVerticalSyncEnabled(true);
     win.setFramerateLimit(60);
     

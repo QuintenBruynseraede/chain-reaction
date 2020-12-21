@@ -65,16 +65,11 @@ void Game::loop()
             }
         }
         
-        
-        
         // Remove inactive GameObjects
         std::vector<GameObject*> new_objects;
         for (auto i=this->objects.begin();i!=this->objects.end();i++) {
             if (!(*i)->isRemoved()) {
                 new_objects.push_back(*i);
-            }
-            else {
-                std::cout << "Removed an object " << std::endl;
             }
         }
         this->objects = new_objects;
@@ -89,6 +84,10 @@ void Game::handle_event ( sf::Event ev )
     switch (ev.type) {
         case sf::Event::Closed: 
             this->window->close();
+        case sf::Event::MouseButtonReleased:
+            if (ev.mouseButton.button == 0) {
+                this->handleLeftClick(ev.mouseButton.x,ev.mouseButton.y);
+            }
     }
     
     return;
@@ -104,6 +103,15 @@ void Game::render()
     
     this->window->display();
 }
+
+void Game::handleLeftClick ( int x, int y )
+{
+    Sphere* explosion = new Sphere(1,1);
+    explosion->explode();
+    explosion->setPosition(x,y);
+    this->add_object(explosion);
+}
+
 
 
 

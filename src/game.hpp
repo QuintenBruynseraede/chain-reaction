@@ -12,12 +12,17 @@ class Game {
 public:
     Game(sf::RenderWindow* win);
     ~Game(){};
+    
+    // Main loop
     void loop();
     void handle_event(sf::Event ev);
     void render();
     
     // GameObject management
     void add_object(GameObject* object);
+    
+    // Events
+    void handleLeftClick(int x, int y);
     
 private:
     sf::RenderWindow* window;

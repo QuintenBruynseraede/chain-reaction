@@ -54,12 +54,6 @@ void Sphere::timestep ( float seconds )
             this->remove();
         }
     }
-    
-    // Explode randomly
-    if (rand() < 40000) {
-        this->explode();
-    }
-    
 }
 
 float Sphere::getGrowth() const
@@ -84,7 +78,6 @@ void Sphere::explode()
 {
     if (this->isExploding())
         return;
-    std::cout << "Exploding!" << std::endl;
     this->exploding = true;
     this->growth = 200;
 }
