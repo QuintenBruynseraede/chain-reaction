@@ -4,12 +4,14 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+class Game;
+
 class GameObject {
 public:
-    GameObject(float x, float y): position(sf::Vector2f(x,y)),velocity(sf::Vector2f(0,0)),acceleration(sf::Vector2f(0,0)) {};
-    GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration);
-    GameObject(float x_position, float y_position, float x_velocity, float y_velocity, float x_acceleration, float y_acceleration);
-    GameObject();
+    GameObject(float x, float y,Game* game): game(game),position(sf::Vector2f(x,y)),velocity(sf::Vector2f(0,0)), acceleration(sf::Vector2f(0,0)) {};
+    GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration,Game* game);
+    GameObject(float x_position, float y_position, float x_velocity, float y_velocity, float x_acceleration, float y_acceleration, Game* game);
+    GameObject(Game* game);
     
     virtual ~GameObject();
     
@@ -40,7 +42,8 @@ public:
     
     void remove();
     bool isRemoved();
-
+    
+    Game* game;
     
 protected:
     sf::Vector2f position;

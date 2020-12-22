@@ -7,8 +7,8 @@
 
 class Sphere : public GameObject {
 public:
-    Sphere(float radius, float growth);
-    Sphere(float radius, float growth, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration);
+    Sphere(float radius, float growth,Game* game);
+    Sphere(float radius, float growth, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration,Game* game);
     virtual ~Sphere() {};
     virtual void draw(sf::RenderWindow* window);
     virtual void timestep(float seconds);
@@ -16,17 +16,21 @@ public:
     float getRadius() const;
     float getGrowth() const;
     
-    static const float MAX_RADIUS;
     
     void explode();
     bool isExploding();
+    
+    bool isSuperSphere();
 
 private:
+    float MAX_RADIUS;
     float radius;
     float growth;
     void printProperties() const;
     float alpha = 255;
     bool exploding = false;
+    
+    bool supersphere = false;
 };
 
 #endif // SPHERE_HPP_INCLUDED

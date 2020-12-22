@@ -4,18 +4,24 @@
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
+#include <cstdlib>
+#include "game.hpp"
 
 
-Sphere::Sphere(float radius, float growth): GameObject()
+Sphere::Sphere(float radius, float growth,Game* game): 
+    GameObject(game)
 {
     this->radius = radius;
     this->growth = growth;
+    this->MAX_RADIUS = 150;
 }
 
-Sphere::Sphere ( float radius, float growth, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration): GameObject(position,velocity,acceleration)
+Sphere::Sphere ( float radius, float growth, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration,Game* game): 
+    GameObject(position,velocity,acceleration,game)
 {
     this->radius = radius;
     this->growth = growth;
+    this->MAX_RADIUS = 150;
 }
 
 
@@ -23,12 +29,21 @@ void Sphere::draw(sf::RenderWindow* window)
 {    
     sf::CircleShape shape(this->radius);
     shape.setPosition(sf::Vector2f(this->position.x-this->radius,this->position.y-this->radius));
-    shape.setFillColor(sf::Color(255,255,255,this->alpha));
+    if (this->supersphere)
+        shape.setFillColor(sf::Color(0,0,255,this->alpha));
+    else
+        shape.setFillColor(sf::Color(255,255,255,this->alpha));
+    
     window->draw(shape);
 }
 
 void Sphere::timestep ( float seconds )
 {
+    if (rand() < 10000) {
+        this->supersphere = true;
+        this->MAX_RADIUS = 150;
+    }
+    
     if (!this->exploding) {
         GameObject::timestep(seconds);
     }
@@ -49,7 +64,13 @@ void Sphere::timestep ( float seconds )
         this->setVelocity(-this->getVelocity().x,this->getVelocity().y);
     
     if (this->exploding) {
-        this->alpha = this->alpha*(0.85);
+        
+        if (supersphere)
+            this->alpha = this->alpha*(0.98);
+        else
+            this->alpha = this->alpha*(0.85);
+        
+        
         if (this->radius > Sphere::MAX_RADIUS || this->alpha <= 1) {
             this->remove();
         }
@@ -72,22 +93,24 @@ void Sphere::printProperties() const
         << this->getVelocity().x << "," << this->getVelocity().y << "), Growth: " << this->getGrowth() << ", Radius: " << this->getRadius() << std::endl;
 }
 
-const float Sphere::MAX_RADIUS = 150;
 
 void Sphere::explode()
 {
     if (this->isExploding())
         return;
     this->exploding = true;
-    this->growth = 200;
-    
-//     Play tick
-
+    this->growth = supersphere? 50 : 200;
+    this->game->add_score(10);
 }
 
 bool Sphere::isExploding()
 {
     return this->exploding;
+}
+
+bool Sphere::isSuperSphere()
+{
+    return this->supersphere;
 }
 
 

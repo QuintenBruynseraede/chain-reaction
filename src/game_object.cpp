@@ -1,27 +1,23 @@
 #include <SFML/Graphics.hpp>
 #include "game_object.hpp"
+#include "game.hpp"
 
 #include <iostream>
 
-GameObject::GameObject()
-{
-    this->setAcceleration(sf::Vector2f(0,0));
-    this->setPosition(sf::Vector2f(0,0));
-    this->setVelocity(sf::Vector2f(0,0));
-}
+GameObject::GameObject(Game* game):
+    GameObject(sf::Vector2f(0,0),sf::Vector2f(0,0),sf::Vector2f(0,0),game)
+{}
 
-GameObject::GameObject ( float x_position, float y_position, float x_velocity, float y_velocity, float x_acceleration, float y_acceleration)
-{
-    this->setAcceleration(sf::Vector2f(x_acceleration,y_acceleration));
-    this->setPosition(sf::Vector2f(x_position,y_position));
-    this->setVelocity(sf::Vector2f(x_velocity,y_velocity));
-}
+GameObject::GameObject ( float x_position, float y_position, float x_velocity, float y_velocity, float x_acceleration, float y_acceleration,Game* game):
+    GameObject(sf::Vector2f(x_acceleration,y_acceleration),sf::Vector2f(x_position,y_position),sf::Vector2f(x_velocity,y_velocity),game)
+{}
 
-GameObject::GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration)
+GameObject::GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration,Game* game)
 {
     this->setAcceleration(sf::Vector2f(acceleration));
     this->setPosition(sf::Vector2f(position));
     this->setVelocity(sf::Vector2f(velocity));
+    this->game = game;
 }
 
 sf::Vector2f GameObject::getAcceleration() const

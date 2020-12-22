@@ -11,7 +11,7 @@
 class Game {
 public:
     Game(sf::RenderWindow* win);
-    ~Game(){};
+    ~Game();
     
     // Main loop
     void loop();
@@ -24,10 +24,19 @@ public:
     // Events
     void handleLeftClick(int x, int y);
     
+    // Scoring
+    void add_score(int points);
+    void restart();
+    
+    
 private:
     sf::RenderWindow* window;
-    std::vector<GameObject*> objects;
+    std::vector<GameObject* > objects;
     int fps;
+    int score = 0;
+    float score_multiplier = 1.0;
+    int tries_left;
+    bool game_over = false;
 };
 
 #endif
