@@ -75,7 +75,7 @@ void Game::loop()
         for (auto i=this->objects.begin();i!=this->objects.end();i++) {
             Sphere* x = dynamic_cast<Sphere*>(*i);
             for (auto ex : explodingSpheres) {
-                int minDist = ex->isSuperSphere()? 50 : 50;
+                int minDist = ex->isSuperSphere()? 50 : 35;
                 if (dist((*ex).getPosition(),x->getPosition()) < minDist) {
                     x->explode();
                 }
@@ -126,7 +126,7 @@ void Game::render()
     
     score.setFont(font);
     score.setString("Score: "+std::to_string(this->score));
-    score.setCharacterSize(24); // in pixels, not points!
+    score.setCharacterSize(20); // in pixels, not points!
     score.setFillColor(sf::Color::White);
     score.setPosition(32,32);
     this->window->draw(score);
@@ -134,25 +134,18 @@ void Game::render()
     
     tries_left.setFont(font);
     tries_left.setString("Tries left: "+std::to_string(this->tries_left));
-    tries_left.setCharacterSize(24);
+    tries_left.setCharacterSize(20);
     if (this->tries_left == 1)
         tries_left.setFillColor(sf::Color::Red);
     tries_left.setFillColor(sf::Color::White);
     tries_left.setPosition(32,64);
     this->window->draw(tries_left);
-    
-//     mul.setFont(font);
-//     mul.setString("Multiplier: "+std::to_string(this->score_multiplier));
-//     mul.setCharacterSize(24);
-//     mul.setFillColor(sf::Color::White);
-//     mul.setPosition(32,96);
-//     this->window->draw(mul);
 
     if (game_over) {
         sf::Text game_over_text;
         game_over_text.setFont(font);
         game_over_text.setString("Game over: click anywhere to restart");
-        game_over_text.setCharacterSize(48); // in pixels, not points!
+        game_over_text.setCharacterSize(32); // in pixels, not points!
         game_over_text.setFillColor(sf::Color::White);
         
         sf::FloatRect textRect = game_over_text.getLocalBounds();
