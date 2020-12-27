@@ -21,6 +21,8 @@ public:
     bool isExploding();
     
     bool isSuperSphere();
+    
+    void setColor(int red,int green, int blue);
 
 private:
     float MAX_RADIUS;
@@ -31,6 +33,10 @@ private:
     bool exploding = false;
     
     bool supersphere = false;
+    
+    int color_r = 255;
+    int color_g = 255;
+    int color_b = 255;
 };
 
 #endif // SPHERE_HPP_INCLUDED

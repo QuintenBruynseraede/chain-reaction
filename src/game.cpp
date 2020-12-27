@@ -39,6 +39,7 @@ void Game::restart()
     this->objects = std::vector<GameObject*>();
     for (int i=0;i<250;i++) {
         Sphere* x = new Sphere(5,0,this);
+        x->setColor(rand() % 256, rand() % 256, rand() % 256);
         x->setMaxPosition(sf::Vector2f(this->window->getSize().x,this->window->getSize().y));
         x->setPosition(sf::Vector2f(30+random_float()*(x->getMaxPosition().x-30),30+random_float()*(x->getMaxPosition().y-30)));
         x->setVelocity(sf::Vector2f(-100+random_float()*200,-100+random_float()*200));

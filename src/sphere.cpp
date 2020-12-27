@@ -32,7 +32,7 @@ void Sphere::draw(sf::RenderWindow* window)
     if (this->supersphere)
         shape.setFillColor(sf::Color(0,0,255,this->alpha));
     else
-        shape.setFillColor(sf::Color(255,255,255,this->alpha));
+        shape.setFillColor(sf::Color(this->color_r,this->color_g,this->color_b,this->alpha));
     
     window->draw(shape);
 }
@@ -113,6 +113,14 @@ bool Sphere::isSuperSphere()
     return this->supersphere;
 }
 
+void Sphere::setColor(int red, int green, int blue)
+{
+    if (red >= 0 && red <= 255 && green >= 0 && green <= 255 && blue >= 0 && blue <= 255) {
+        this->color_b = blue;
+        this->color_g = green;
+        this->color_r = red;
+    }
+}
 
 
 
