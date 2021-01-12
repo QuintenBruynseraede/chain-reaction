@@ -5,7 +5,7 @@ Small game made in C++ with SFML. Create chain reactions by clicking anywhere an
 ![img](https://github.com/QuintenBruynseraede/chain-reaction/raw/main/assets/screenshots/game.gif "Gameplay")
 
 ## Dependencies
-- SFML libraries
+- [SFML](https://www.sfml-dev.org/tutorials/2.5/start-linux.php)
 
 ## Compile
 ```
